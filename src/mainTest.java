@@ -3,6 +3,7 @@ import model.Member;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Optional;
 
 public class mainTest {
     public static void main(String[] args) {
@@ -68,6 +69,31 @@ public class mainTest {
         System.out.println("member2: "+ member2);
 //        member1: model.Member@6d8a00e3
 //        member2: model.Member@548b7f67
+
+        // Optional => null (NPE)때문에 쓰는 객체다.
+        Optional<String> stropt = Arrays.asList("dsg", "kmb").stream().findFirst();
+//        System.out.println("stropt: "+ stropt.get());
+//        System.out.println("stropt: "+ stropt.orElse("empty"));     // Optional 객체 값이 null 이면
+        System.out.println("stropt: "+ stropt.orElseGet(String::new));     // Optional객체값에 상관없이 새 객체로 생성할 때 사용
+        System.out.println("stropt: "+ stropt.orElseThrow(IllegalArgumentException::new));
+
+        String str = null;
+
+        Integer int1 = null;    // wrapper 클래스는 null값을 허용
+
+        // of(x) vs ofnullable(o) , ifPresent
+//        Optional.of(null).ifPresent(s-> System.out.println(s));     // NPE 발생할 수 있음
+        Optional.ofNullable(null).ifPresent(System.out::println);      // NPE 발생하지 않음!
+        // null일지 모르는 값이 들어올 때 방어로직으로 많이 사용한다.
+        var str1 = Optional.ofNullable(str).orElse("null");
+        System.out.println("str1: "+ str1);
+
+        var integer = Optional.ofNullable(int1).orElse(0);
+        System.out.println("integer: "+ integer);
+
+//        if (str.isEmpty()) {
+//            System.out.println("str은 s=null입니다. ");
+//        }
 
 
     }
