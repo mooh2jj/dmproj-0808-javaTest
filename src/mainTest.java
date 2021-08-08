@@ -94,7 +94,9 @@ public class mainTest {
 //        if (str.isEmpty()) {
 //            System.out.println("str은 s=null입니다. ");
 //        }
-
+//        1) Optional 은 null 처리때문에 쓰는 객체이다.
+//        2) 메서드 정리 : get, orElse, orElseGet, orElseThrow,
+//        3) of x ofnullable() ifPresnt() orElse 를 많이 쓴다.
 
     }
 }
